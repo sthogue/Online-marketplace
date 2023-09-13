@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const { Item } = require('../../models');
-const withAuth = require('../../utils/auth');
+const { withAuth } = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
   try {
-    const { fileUpload, imageName, imageDescription, uploadDate } = req.body;
+    const { imageName, imageDescription, uploadDate } = req.body;
 
     // Create a new item with the received data
     const newItem = await Item.create({
