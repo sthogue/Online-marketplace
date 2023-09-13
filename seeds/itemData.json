@@ -1,13 +1,18 @@
 
- [
+[
   {
-    "name": "Item 1",
-    "description": "Description for item 1",
-    "user_id": "1" 
+    "item_name": "Couch",
+    "price": 500,
+    "description": "A couch that is brown, it is roughly 2 years old and can sit up to a max of 5 people."
   },
   {
-    "name": "Item 2",
-    "description": "Description for item 2",
-    "user_id": "2" 
-    }
+    "item_name": "Snowboard",
+    "price": 300,
+    "description": "A Men's snowboard that is 155cm, it's been waxed once every year and been used for 2 seasons."
+  },
+  {
+    "item_name": "Nike Panda Dunks",
+    "price": 150,
+    "description": "Nike Panda Dunks that are Size 9. Their condition is 9/10 and were only worn twice."
+  }
 ]
