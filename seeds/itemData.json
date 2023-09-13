@@ -1,17 +1,21 @@
-[
+  [
     {
-      "item_name": "Couch",
-      "description": "A couch that is brown, it is roughly 2 years old and can sit up to a max of 5 people.",
-      "item_image": 5000
+      "name": "Item 1 Name",
+      "description": "Description for Item 1",
+      "date_created": "2023-09-12T00:45:10.755Z",
+      "user_id": 3
     },
     {
-      "item_name": "Snowboard",
-      "description": "A Men's snowboard that is 155cm, it's been waxed once every year and been used for 2 seasons.",
-      "item_image": 5000
+      "name": "Item 2 Name",
+      "description": "Description for Item 2",
+      "date_created": "2023-09-12T00:45:10.755Z",
+      "user_id": 3
     },
     {
-      "item_name": "Nike Panda Dunks",
-      "description": "Nike Panda Dunks that are Size 9. Their condition is 9/10 and were only worn twice.",
-      "item_image": 5000
+      "name": "Item 3 Name",
+      "description": "Description for Item 3",
+      "date_created": "2023-09-12T00:45:10.755Z",
+      "user_id": 3
     }
   ]
+  
