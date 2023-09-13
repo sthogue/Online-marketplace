@@ -1,13 +1,20 @@
-
- [
-  {
-    "name": "Item 1",
-    "description": "Description for item 1",
-    "user_id": "1" 
-  },
-  {
-    "name": "Item 2",
-    "description": "Description for item 2",
-    "user_id": "2" 
+[
+    {
+      "name": "Item 1 Name",
+      "description": "Description for Item 1",
+      "date_created": "2023-09-12T00:45:10.755Z",
+      "user_id": 3
+    },
+    {
+      "name": "Item 2 Name",
+      "description": "Description for Item 2",
+      "date_created": "2023-09-12T00:45:10.755Z",
+      "user_id": 3
+    },
+    {
+      "name": "Item 3 Name",
+      "description": "Description for Item 3",
+      "date_created": "2023-09-12T00:45:10.755Z",
+      "user_id": 3
     }
-]
+  ]
