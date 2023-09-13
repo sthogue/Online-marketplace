@@ -11,8 +11,12 @@ Item.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    // price can have up to 10 (Precision) total digits in value and 2 (Scale) digits to the right of the decimal
+    price: {
+      type: DataTypes.DECIMAL (12,2),
       allowNull: false,
     },
     description: {
@@ -36,7 +40,7 @@ Item.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'item',
+    modelName: 'Item',
   }
 );
 
