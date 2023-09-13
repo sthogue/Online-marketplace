@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Item, User } = require('../models');
-const withAuth = require('../utils/auth');
+const { withAuth, ensureAuthenticated} = require('../utils/auth');
+const passport = require('passport');
 
 router.get('/', async (req, res) => {
   try {
@@ -50,7 +51,7 @@ router.get('/item/:id', async (req, res) => {
 });
 
 // Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
+router.get('/profile', ensureAuthenticated, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
@@ -77,6 +78,28 @@ router.get('/login', (req, res) => {
   }
 
   res.render('login');
+});
+
+router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Redirect or respond with a success message
+    if (req.session.logged_in) {
+      res.redirect('homepage');
+    }
+  }
+);
+
+router.get('logout', (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+  return redirect('/');
 });
 
 module.exports = router;
