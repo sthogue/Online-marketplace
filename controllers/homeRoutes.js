@@ -2,6 +2,10 @@ const router = require('express').Router();
 const { Item, User } = require('../models');
 const { withAuth, ensureAuthenticated} = require('../utils/auth');
 
+
+const passport = require('passport');
+
+
 router.get('/', async (req, res) => {
   try {
     // Get all Items and JOIN with user data
@@ -78,6 +82,18 @@ router.get('/login', (req, res) => {
 
   res.render('login');
 });
+
+
+router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Redirect or respond with a success message
+    if (req.session.logged_in) {
+      res.redirect('homepage');
+    }
+  }
+);
 
 router.get('logout', (req, res) => {
   if (req.session.logged_in) {
