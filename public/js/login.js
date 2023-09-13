@@ -44,6 +44,11 @@ const signupFormHandler = async (event) => {
   }
 };
 
+const googleFormHandler = async (event) => {
+  event.preventDefault();  
+  document.location.replace('/auth/google');
+};
+
 document
   .querySelector('.login-form')
   .addEventListener('submit', loginFormHandler);
@@ -51,3 +56,7 @@ document
 document
   .querySelector('.signup-form')
   .addEventListener('submit', signupFormHandler);
+
+document
+  .querySelector('#google-login')
+  .addEventListener('click', googleFormHandler);
