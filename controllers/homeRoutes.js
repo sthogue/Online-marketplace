@@ -1,7 +1,10 @@
 const router = require('express').Router();
 const { Item, User } = require('../models');
 const { withAuth, ensureAuthenticated} = require('../utils/auth');
+
+
 const passport = require('passport');
+
 
 router.get('/', async (req, res) => {
   try {
@@ -79,6 +82,7 @@ router.get('/login', (req, res) => {
 
   res.render('login');
 });
+
 
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 

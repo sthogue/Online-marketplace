@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const passport = require('passport');
 
 router.post('/', async (req, res) => {
   try {
@@ -47,6 +48,17 @@ router.post('/login', async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Redirect or respond with a success message
+    if (req.session.logged_in) {
+      res.redirect('homepage');
+    }
+  }
+);
 
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
