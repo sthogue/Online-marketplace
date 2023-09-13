@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Item } = require('../../models');
-const withAuth = require('../../utils/auth');
+const {withAuth} = require('../../utils/auth');
 
 // this is a GET request to get ALL items listed in the database
 router.get('/', withAuth,  async (req, res) => {
