@@ -11,7 +11,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const passConfig = require('./config/passport');
-const GStrategy = require()
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
