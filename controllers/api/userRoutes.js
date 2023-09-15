@@ -1,6 +1,20 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 const passport = require('passport');
+const fs = require('fs');
+const path = require('path');
+
+router.get('/user-data', (req, res) => {
+  try {
+    const userDataPath = path.join(__dirname, '../../seeds/userData.json');
+    const userData = JSON.parse(fs.readFileSync(userDataPath, 'utf8'));
+    
+    res.json(userData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 router.post('/', async (req, res) => {
   try {
