@@ -10,7 +10,8 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const passconfig = require('./config/passport');
+const passConfig = require('./config/passport');
+const GStrategy = require()
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -40,9 +41,9 @@ app.use(passport.session());
 passport.use(
   new GoogleStrategy(
     {
-      clientID: passconfig.google.clientID,
-      clientSecret: passconfig.google.clientSecret,
-      callbackURL: passconfig.google.callbackURL,
+      clientID: passConfig.google.clientID,
+      clientSecret: passConfig.google.clientSecret,
+      callbackURL: passConfig.google.callbackURL,
       scope: ['profile'],
       state: true
     },
@@ -93,13 +94,13 @@ passport.use(
       }
 ));
 
-const userRoutes = require('./controllers/api/userRoutes');
-const itemRoutes = require('./controllers/api/itemRoutes');
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
 
-app.use('/api/items', itemRoutes);
-app.use('/api/users', userRoutes);
-
-
+passport.deserializeUser((id, done) => {
+  // Here, you can retrieve the user from the database based on the `id` and call the `done` callback with the user object.
+});
 
 
 // Inform Express.js on which template engine to use

@@ -63,8 +63,10 @@ router.post('/login', async (req, res) => {
   }
 });
 
+//initiates the authentication process and redirects the user to the Google login page
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
+//handles the callback from Google after the user has logged in and exchanges the authorization code for user information
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
     // Redirect or respond with a success message

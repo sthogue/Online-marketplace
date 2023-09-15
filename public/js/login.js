@@ -45,17 +45,19 @@ const signupFormHandler = async (event) => {
 };
 
 const googleFormHandler = async (event) => {
-  event.preventDefault();  
+  event.preventDefault();
   document.location.replace('/auth/google');
+  console.log("-------googleFormHandler------");
+
 };
 
 document
-  .querySelector('.login-form')
-  .addEventListener('submit', loginFormHandler);
+  .querySelector('#login-btn')
+  .addEventListener('click', loginFormHandler);
 
 document
-  .querySelector('.signup-form')
-  .addEventListener('submit', signupFormHandler);
+  .querySelector('#signup-btn')
+  .addEventListener('click', signupFormHandler);
 
 document
   .querySelector('#google-login')
