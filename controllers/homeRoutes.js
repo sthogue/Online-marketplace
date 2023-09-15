@@ -31,6 +31,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/upload', (req, res) => {
+
+  res.render('upload');
+});
+
+router.get('/edit', (req, res) => {
+
+  res.render('edit');
+});
+
 router.get('/item/:id', async (req, res) => {
   try {
     const itemData = await Item.findByPk(req.params.id, {
@@ -54,24 +64,39 @@ router.get('/item/:id', async (req, res) => {
 });
 
 // Use withAuth middleware to prevent access to route
-router.get('/profile', ensureAuthenticated, async (req, res) => {
-  try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Item }],
-    });
 
-    const user = userData.get({ plain: true });
-
-    res.render('profile', {
-      ...user,
-      logged_in: true
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.get('/profile', ensureAuthenticated, async (req, res) => {
+  router.get('/profile', async (req, res) => {
+    try {
+      // Find the logged in user based on the session ID
+      // const userData = await User.findByPk(req.session.user_id, {
+      //   attributes: { exclude: ['password'] },
+      //   include: [{ model: Item }],
+      // });
+  
+      // const user = userData.get({ plain: true });
+  
+      const itemData = await Item.findAll({
+        include: [
+          {
+            model: User,
+            attributes: ['name'],
+          },
+        ],
+      });
+  
+      const items = itemData.map((item) => item.get({ plain: true }));
+  
+      res.render('profile', {
+        // ...user,
+        items,
+        logged_in: true,
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+  
 
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
@@ -82,6 +107,8 @@ router.get('/login', (req, res) => {
 
   res.render('login');
 });
+
+
 
 
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
@@ -95,7 +122,7 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
   }
 );
 
-router.get('logout', (req, res) => {
+router.get('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();

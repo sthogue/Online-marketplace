@@ -2,14 +2,36 @@ body {
   background-color: red;
 }
 
+.buffer {
+  padding-top: 1%;
+}
+
+.left-pad {
+  padding-left: 3%;
+}
+
+.bg-white {
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .logo {
   display: flex;
-  justify-content: center; /* Horizontally center */
-  align-items: center; /* Vertically center */
-  width: 150px; /* Adjust the width as needed */
-  height: 150px; /* Adjust the height as needed */
-  border-radius: 50%; /* Create an oval shape */
-  overflow: hidden; /* Hide the corners to make it oval */
+  justify-content: center; 
+  align-items: center; 
+  width: 150px;
+  height: 150px; 
+  border-radius: 50%; 
+  overflow: hidden; 
+}
+
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .flex-nav {
@@ -17,12 +39,6 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  background-color: #1b89bc;
-  color: #fff;
-}
-
-.img-logo {
-  
 }
 
 

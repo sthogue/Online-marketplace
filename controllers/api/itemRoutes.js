@@ -3,13 +3,16 @@ const { Item } = require('../../models');
 const {withAuth} = require('../../utils/auth');
 
 // this is a GET request to get ALL items listed in the database
-router.get('/', withAuth,  async (req, res) => {
+
+// router.get('/', withAuth,  async (req, res) => {
+
+router.get('/', async (req, res) => {
   try {
     const newItem = await Item.findAll();
-    // ({
-    //   ...req.body,
-    //   user_id: req.session.user_id,
-    // });
+    ({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
 
     res.status(200).json(newItem);
   } catch (err) {
@@ -19,7 +22,9 @@ router.get('/', withAuth,  async (req, res) => {
 });
 
 // this is a GET request to get one item BY ID in the database
-router.get('/:id', withAuth, async (req, res) => {
+// router.get('/:id', withAuth, async (req, res) => {
+
+router.get('/:id', async (req, res) => {
   try {
     const newItem = await Item.findOne();
     ({
@@ -35,7 +40,9 @@ router.get('/:id', withAuth, async (req, res) => {
 });
 
 // this is a POST request to CREATE a new item with a unique ID
-router.post('/', withAuth, async (req, res) => {
+// router.post('/', withAuth, async (req, res) => {
+
+  router.post('/', async (req, res) => {
   try {
     const newItem = await Item.create({
       ...req.body,
@@ -49,8 +56,10 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 // this is a DELETE request to delete an item from the database
-router.delete('/:id', withAuth, async (req, res) => {
-  try {
+// router.delete('/:id', withAuth, async (req, res) => {
+
+router.delete('/:id', async (req, res) => {
+try {
     const itemData = await Item.destroy({
       where: {
         id: req.params.id,

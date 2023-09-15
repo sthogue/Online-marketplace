@@ -3,20 +3,27 @@ module.exports = {
     // Format date as MM/DD/YYYY
     return date.toLocaleDateString();
   },
-  format_amount: (amount) => {
-    // format large numbers with commas
-    return parseInt(amount).toLocaleString();
-  },
-  get_emoji: () => {
-    const randomNum = Math.random();
+  thumbnail: (category_name) => {
+    let imagePath;
 
-    // Return a random emoji
-    if (randomNum > 0.7) {
-      return `<span for="img" aria-label="lightbulb">💡</span>`;
-    } else if (randomNum > 0.4) {
-      return `<span for="img" aria-label="laptop">💻</span>`;
+    if (category_name === "Electronics") {
+      imagePath = "/images/electronics.jpeg";
+    } else if (category_name === "Furniture") {
+      imagePath = "/images/furniture.jpeg";
+    } else if (category_name === "Clothing") {
+      imagePath = "/images/clothing.png";
+    } else if (category_name === "Books") {
+      imagePath = "/images/books.avif";
+    } else if (category_name === "Toys") {
+      imagePath = "/images/toys.jpeg";
+    } else if (category_name === "Furniture") {
+      imagePath = "/images/furniture.jpeg";
+    } else if (category_name === "Other") {
+      imagePath = "/images/other.jpeg";
     } else {
-      return `<span for="img" aria-label="gear">⚙️</span>`;
+      imagePath = "/images/default.jpg";
     }
-  },
+
+    return `<img src="${imagePath}" alt="${category_name}" width="100" height="100">`;
+  }
 };

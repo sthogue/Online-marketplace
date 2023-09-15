@@ -1,42 +1,43 @@
 const uploadFileHandler = async (event) => {
-    event.preventDefault();
-  
-    const fileInput = document.querySelector('#fileUpload');
-    const name = document.querySelector('#imageName').value.trim();
-    const description = document.querySelector('#imageDescription').value.trim();
-  
-    if (!fileInput.files[0]) {
-      alert('Please select a file to upload');
-      return;
+  event.preventDefault();
+
+  const itemNameInput = document.querySelector('#itemName'); // Target the input for item name
+  const itemPriceInput = document.querySelector('#itemPrice'); // Target the input for item price
+  const itemDescriptionInput = document.querySelector('#itemDescription'); // Target the textarea for item description
+
+  const name = itemNameInput.value.trim();
+  const price = itemPriceInput.value.trim();
+  const description = itemDescriptionInput.value.trim();
+
+  // Validate your form fields as needed (e.g., check if they are not empty)
+
+  // Create a FormData object to send data to the server
+  const formData = new FormData();
+
+  // Append form data with the item details
+  formData.append('item_name', name);
+  formData.append('price', price);
+  formData.append('description', description);
+
+  try {
+    const response = await fetch('/api/items', { // Updated API route for creating items
+      method: 'POST',
+      body: formData,
+    });
+
+    if (response.ok) {
+      document.location.replace('/profile'); // Redirect to the profile page on success
+    } else {
+      alert('Failed to create item');
     }
-  
-    const formData = new FormData();
-  
-    formData.append('fileUpload', fileInput.files[0]);
-    formData.append('imageName', name);
-    formData.append('imageDescription', description);
-  
-    const formattedDate = dayjs().format('MMM DD, YY');
-  
-    formData.append('uploadDate', formattedDate);
-  
-    try {
-      const response = await fetch('/api/upload', { // Updated API route
-        method: 'POST',
-        body: formData,
-      });
-  
-      if (response.ok) {
-        document.location.replace('/profile');
-      } else {
-        alert('Failed to upload file');
-      }
-    } catch (error) {
-      console.error(error);
-      alert('An error occurred while uploading the file');
-    }
-  };
-  
-  const saveButton = document.querySelector('#saveButton');
-  saveButton.addEventListener('click', uploadFileHandler);
-  
+  } catch (error) {
+    console.error(error);
+    alert('An error occurred while creating the item');
+  }
+};
+
+// Target the form in your upload.handlebars
+const createItemForm = document.querySelector('#createItemForm');
+
+// Attach the event listener to the form's submit button
+createItemForm.addEventListener('submit', uploadFileHandler);

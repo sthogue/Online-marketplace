@@ -1,17 +1,27 @@
 [
   {
-    "item_name": "Couch",
-    "price": 500,
-    "description": "A couch that is brown, it is roughly 2 years old and can sit up to a max of 5 people."
+    "category_name": "Toys",
+    "item_name": "Sample Item 1",
+    "price": 19.99,
+    "description": "This is the first sample item.",
+    "date_created": "2023-09-13T00:00:00Z",
+    "user_id": 1
   },
   {
-    "item_name": "Snowboard",
-    "price": 300,
-    "description": "A Men's snowboard that is 155cm, it's been waxed once every year and been used for 2 seasons."
+    "category_name": "Clothing",
+    "item_name": "Sample Item 2",
+    "price": 29.99,
+    "description": "This is the second sample item.",
+    "date_created": "2023-09-14T00:00:00Z",
+    "user_id": 2
   },
   {
-    "item_name": "Nike Panda Dunks",
-    "price": 150,
-    "description": "Nike Panda Dunks that are Size 9. Their condition is 9/10 and were only worn twice."
+    "category_name": "Books",
+    "item_name": "Sample Item 3",
+    "price": 39.99,
+    "description": "This is the third sample item.",
+    "date_created": "2023-09-15T00:00:00Z",
+    "user_id": 3
   }
 ]
+

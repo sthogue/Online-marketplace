@@ -93,6 +93,13 @@ passport.use(
       }
 ));
 
+const userRoutes = require('./controllers/api/userRoutes');
+const itemRoutes = require('./controllers/api/itemRoutes');
+
+app.use('/api/items', itemRoutes);
+app.use('/api/users', userRoutes);
+
+
 
 
 // Inform Express.js on which template engine to use

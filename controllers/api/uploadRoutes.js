@@ -8,6 +8,7 @@ router.post('/', withAuth, async (req, res) => {
 
     // Create a new item with the received data
     const newItem = await Item.create({
+      category_name: category,
       name: imageName,
       description: imageDescription,
       date_created: uploadDate,
