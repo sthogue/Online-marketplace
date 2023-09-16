@@ -4,12 +4,15 @@ const passport = require('passport');
 const fs = require('fs');
 const path = require('path');
 
-router.get('/user-data', (req, res) => {
+router.get('/users', async(req, res) => {
   try {
-    const userDataPath = path.join(__dirname, '../../seeds/userData.json');
-    const userData = JSON.parse(fs.readFileSync(userDataPath, 'utf8'));
+    //const userDataPath = path.join(__dirname, '../../seeds/userData.json');
+    //const userData = JSON.parse(fs.readFileSync(userDataPath, 'utf8'));
     
-    res.json(userData);
+    const userData = await User.findAll({
+      attributes: { exclude: ['password'] }
+    });
+    res.status(200).json(userData);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: 'Internal Server Error' });
