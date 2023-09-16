@@ -28,12 +28,20 @@ User.init(
                 isEmail: true,
             },
         },
+        provider: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         password: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
-                len: [8],
+                len: [6],
             },
+        },
+        googleId: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
     },
     {
