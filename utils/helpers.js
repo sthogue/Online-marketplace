@@ -3,6 +3,8 @@ module.exports = {
     // Format date as MM/DD/YYYY
     return date.toLocaleDateString();
   },
+  // function to generate an image if category_name equals a specific category
+  // it specifies an image path based on category name
   thumbnail: (category_name) => {
     let imagePath;
 
