@@ -41,6 +41,12 @@ router.get('/edit', (req, res) => {
   res.render('edit');
 });
 
+router.get('/about', (req, res) => {
+  
+  res.render('about');
+});
+
+
 router.get('/item/:id', async (req, res) => {
   try {
     const itemData = await Item.findByPk(req.params.id, {
@@ -76,30 +82,25 @@ router.get('/item/:id', async (req, res) => {
 
 // Use withAuth middleware to prevent access to route
 
-// router.get('/profile', ensureAuthenticated, async (req, res) => {
-  router.get('/profile', async (req, res) => {
+router.get('/profile', ensureAuthenticated, async (req, res) => {
     try {
       // Find the logged in user based on the session ID
-      // const userData = await User.findByPk(req.session.user_id, {
-      //   attributes: { exclude: ['password'] },
-      //   include: [{ model: Item }],
-      // });
-  
-      // const user = userData.get({ plain: true });
-  
-      const itemData = await Item.findAll({
-        include: [
-          {
-            model: User,
-            attributes: ['name'],
-          },
-        ],
+      const userData = await User.findByPk(req.session.user_id, {
+        attributes: { exclude: ['password'] },
+        include: [{ model: Item }],
       });
   
-      const items = itemData.map((item) => item.get({ plain: true }));
+      const user = userData.get({ plain: true });
   
+  
+      const items = await Item.findAll({
+        where: {
+          user_id: req.session.user_id,
+        },
+      });
+
       res.render('profile', {
-        // ...user,
+        ...user,
         items,
         logged_in: true,
       });

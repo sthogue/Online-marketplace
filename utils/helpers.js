@@ -10,8 +10,6 @@ module.exports = {
 
     if (category_name === "Electronics") {
       imagePath = "/images/electronics.jpeg";
-    } else if (category_name === "Furniture") {
-      imagePath = "/images/furniture.jpeg";
     } else if (category_name === "Clothing") {
       imagePath = "/images/clothing.png";
     } else if (category_name === "Books") {
@@ -23,7 +21,7 @@ module.exports = {
     } else if (category_name === "Other") {
       imagePath = "/images/other.jpeg";
     } else {
-      imagePath = "/images/default.jpg";
+      imagePath = "/images/default.png";
     }
 
     return `<img src="${imagePath}" alt="${category_name}" width="100" height="100">`;
