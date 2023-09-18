@@ -1,30 +1,28 @@
-
+<div
+  class='modal modal-sheet position-static d-block p-4 py-md-5'
+  tabindex='-1'
+  role='dialog'
+  id='modalItem'
+>
   <div class='modal-dialog' role='document'>
     <div class='modal-content rounded-4 shadow'>
       <div class='modal-header p-5 pb-4 border-bottom-0'>
         <div class="col">
+            <div class="padding">
+                {{{thumbnail category_name}}}
+            </div>
+            <div class="padding">
+                <h5 class="card-title">{{item_name}}</h5>
+            </div>
           <div class="card shadow-sm">
-            {{{thumbnail category_name}}}
             <div class="card-body">
-              <h5 class="card-title">{{item_name}}</h5>
-              <p class="card-text">Price: ${{price}}</p>
+              <p class="card-text">Price: ${{{format_amount price}}}</p>
               <p class="card-text">Description: {{description}}</p>
               <p class="card-text">Uploaded: {{{format_date date_created}}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">{{buttonText}}</button>
-                </div>
-              </div>
+              <p class="card-text">Contact Seller: @{{{sellerEmail user.email}}}</p>
             </div>
           </div>
         </div>
-
-        <div
-  class='modal modal-sheet position-static d-block p-4 py-md-5'
-  tabindex='-1'
-  role='dialog'
-  id='modalLogin'
->
       </div>
     </div>
   </div>
