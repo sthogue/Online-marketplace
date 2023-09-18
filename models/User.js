@@ -8,6 +8,8 @@ class User extends Model {
     }
 }
 
+// This initializes the User model, each User will have the following fields of data (id, name, etc.)
+// each field of data has specific configurations to ensure the correct data is added to the tables and database
 User.init(
     {
         id: {
@@ -44,6 +46,8 @@ User.init(
             allowNull: true,
         },
     },
+    // hooks will allow for the following functions to bcrypt the user's password so that the passwords are saved in the database as hashed passwords
+    // without the hooks, the sensitive user password data will be inserted into the database without being encrypted in any way
     {
         hooks: {
             beforeCreate: async (newUserData) => {

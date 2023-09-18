@@ -1,8 +1,10 @@
+// import sequelize and require dotenv to load .env file to store sensitive data
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
 let sequelize;
 
+// use a JAWSDB_URL env variable if there is one, otherwise use the .env file
 if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {

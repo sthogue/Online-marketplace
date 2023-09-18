@@ -1,8 +1,12 @@
+// import Model and DataTypes from Sequelize
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+// This creates a class 'Item' which will use the Model class from Sequelize
 class Item extends Model {}
 
+// This initializes the Item model, each Item will have the following fields of data (id, category_name, etc.)
+// each field of data has specific configurations to ensure the correct data is added to the tables and database
 Item.init(
   {
     id: {
