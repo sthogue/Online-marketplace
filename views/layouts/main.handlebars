@@ -21,6 +21,7 @@
         <div class="col-sm-4 offset-md-1 py-4">
           <ul class="list-unstyled ml-auto">
             <li><a href="/" class="text-white">Home</a></li>
+            <!-- if user logged in, render this profile and logout, otherwise render login and sign-up -->
             {{#if logged_in}}
             <li><a href="/profile" class="text-white">Profile</a></li>
             <li><a href="#" class="text-white">Logout</a></li>
@@ -46,7 +47,7 @@
   </div>
 </header> 
 <div class="container-fluid">
-
+<!-- handlebar placeholder for location of where body should be inserted -->
   {{{body}}}
 </div>
 
