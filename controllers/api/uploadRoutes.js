@@ -4,13 +4,14 @@ const { withAuth } = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
   try {
-    const { imageName, imageDescription, uploadDate } = req.body;
+    const { itemName, itemPrice, itemDescription, uploadDate } = req.body;
 
     // Create a new item with the received data
     const newItem = await Item.create({
       category_name: category,
-      name: imageName,
-      description: imageDescription,
+      item_name: itemName,
+      price: itemPrice,
+      description: itemDescription,
       date_created: uploadDate,
       user_id: req.session.user_id,
     });

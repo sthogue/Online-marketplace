@@ -21,11 +21,23 @@ module.exports = {
     } else if (category_name === "Furniture") {
       imagePath = "/images/furniture.jpeg";
     } else if (category_name === "Other") {
-      imagePath = "/images/other.jpeg";
+      imagePath = "/images/default.png";
     } else {
       imagePath = "/images/default.jpg";
     }
 
     return `<img src="${imagePath}" alt="${category_name}" width="100" height="100">`;
-  }
-};
+    },
+      sellerEmail: (email) => {
+        return email;
+      },
+      format_amount: (amount) => {
+      const parsedAmount = parseFloat(amount);
+
+        if (!isNaN(parsedAmount)) {
+          return parsedAmount.toFixed(2);
+        } else {
+          return "Invalid Amount";
+        }
+      }
+    };

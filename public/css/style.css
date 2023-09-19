@@ -5,6 +5,9 @@ body {
 .buffer {
   padding-top: 1%;
 }
+.padding {
+  padding: 2%;
+}
 
 .left-pad {
   padding-left: 3%;

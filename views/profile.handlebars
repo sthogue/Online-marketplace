@@ -9,7 +9,7 @@
             {{{thumbnail category_name}}}
             <div class="card-body">
               <h5 class="card-title">{{item_name}}</h5>
-              <p class="card-text">Price: ${{price}}</p>
+              <p class="card-text">Price: ${{{format_amount price}}}</p>
               <p class="card-text">Description:{{description}}</p>
               <p class="card-text">Uploaded: {{{format_date date_created}}}</p>
 
@@ -26,5 +26,5 @@
       </div>
     </div>
   </div>
-  <script src="js/profile"></script>
+  <script src="js/profile.js"></script>
 </main>
