@@ -9,7 +9,7 @@ const crypto = require('crypto');
 
 const userData = [];
 
-router.get('/users', async(req, res) => {
+router.get('/', async(req, res) => {
   try {
     //const userDataPath = path.join(__dirname, '../../seeds/userData.json');
     //const userData = JSON.parse(fs.readFileSync(userDataPath, 'utf8'));
