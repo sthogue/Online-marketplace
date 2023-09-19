@@ -36,7 +36,7 @@ router.get('/upload', (req, res) => {
   res.render('upload');
 });
 
-router.get('/edit', (req, res) => {
+router.get('/edit-item/:id', (req, res) => {
 
   res.render('edit');
 });
