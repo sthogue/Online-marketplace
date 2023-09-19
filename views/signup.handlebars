@@ -23,36 +23,47 @@
         ></button>
       </div>
       <div class='modal-body p-5 pt-0'>
-        <form class=''>
+        <form class='signup-form'>
           <div class='form-floating mb-3'>
-            <input type='text' class='form-control rounded-3' id='name-signup' placeholder='Your Name' />
-            <label for='name-signup'>Your Name</label>
+            <input
+              type='text'
+              class='form-control rounded-3'
+              id='name-signup'
+              name='name-signup'
+              placeholder='Your Name'
+            />
+            <label for='name-signup'>Name</label>
           </div>
           <div class='form-floating mb-3'>
             <input
               type='email'
               class='form-control rounded-3'
-              id='floatingInput'
+              id='email-signup'
+              name='email-signup'
               placeholder='name@example.com'
             />
-            <label for='email-signup'>Email address</label>
+            <label for='email-signup'>Email</label>
           </div>
           <div class='form-floating mb-3'>
             <input
               type='password'
               class='form-control rounded-3'
-              id='floatingPassword'
+              id='password-signup'
+              name='password-signup'
               placeholder='Password'
             />
             <label for='password-signup'>Password</label>
           </div>
           <button
-            id="signup-btn"
             class='w-100 mb-2 btn btn-lg rounded-3 btn-primary'
             type='submit'
           >Sign up</button>
-          <small class='text-body-secondary'>If you already have an account click <a href='/login'>login</a>.</small>
-          <hr class='my-4'>
+        </form>
+        <div>
+          <small class='text-body-secondary'>If you already have an account
+            click
+            <a href='/login'>login</a>.</small>
+          <hr class='my-4' />
           <button
             class='w-100 py-2 mb-2 btn btn-outline-primary rounded-3'
             type='submit'
@@ -62,7 +73,7 @@
               /></svg>
             Sign up with Google
           </button>
-        </form>
+        </div>
       </div>
     </div>
   </div>
