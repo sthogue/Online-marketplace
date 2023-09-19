@@ -80,7 +80,7 @@ passport.use(
       try {
         console.log(profile);
         // Find or create a user in the database based on their Google ID
-        const user = await User.findOne({
+        var user = await User.findOne({
           where:
             { email: profile.emails[0].value }
         });
