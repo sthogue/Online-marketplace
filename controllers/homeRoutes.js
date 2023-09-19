@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Item, User } = require('../models');
-const { withAuth, ensureAuthenticated} = require('../utils/auth');
+const { GLwithAuth, withAuth, ensureAuthenticated} = require('../utils/auth');
 
 
 const passport = require('passport');
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       items, 
-      logged_in: req.session.logged_in 
+      logged_in: req.session.logged_in || req.isAuthenticated()
     });
   } catch (err) {
     res.status(500).json(err);
@@ -86,7 +86,7 @@ router.get('/item/:id', async (req, res) => {
 
 // Use withAuth middleware to prevent access to route
 
-  router.get('/profile', async (req, res) => {
+  router.get('/profile', GLwithAuth, async (req, res) => {
 
    try {
       let userID;
