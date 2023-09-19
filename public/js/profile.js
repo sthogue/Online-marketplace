@@ -1,5 +1,5 @@
 const delButtonHandler = async (event) => {
-  if (event.target.classList.contains('delete-button')) {
+  if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
 
     const response = await fetch(`/api/items/${id}`, {
@@ -20,6 +20,10 @@ const editButtonHandler = (event) => {
     document.location.href = `/edit-item/${id}`;
   }
 };
+
+document.getElementById("upload-button").addEventListener("click", function() {
+  window.location.href = "/upload";
+});
 
 document.querySelectorAll('.btn-group').forEach((btnGroup) => {
   btnGroup.addEventListener('click', (event) => {

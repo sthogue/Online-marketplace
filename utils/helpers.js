@@ -39,8 +39,5 @@ module.exports = {
     } else {
       return "Invalid Amount";
     }
-  },
-  profile_name: (name) => {
-    return name;
   }
 };
