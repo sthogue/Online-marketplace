@@ -13,4 +13,12 @@ module.exports = {
     }
     res.redirect('/login');
   },
+  GLwithAuth: (req, res, next) => {
+    if (req.session.user_id === undefined && !req.isAuthenticated()) {
+      res.redirect('/login');
+    } else {
+      next();
+    }
+  },
 };
+   
