@@ -13,7 +13,7 @@ const passConfig = require('./config/passport');
 const crypto = require('crypto');
 const { User } = require('./models');
  
-const userData = [];
+// const userData = [];
 
 // import sequelize and session store to store session data
 const sequelize = require('./config/connection');

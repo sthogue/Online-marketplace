@@ -6,6 +6,7 @@ const uploadFileHandler = async (event) => {
   const itemPriceInput = document.querySelector('#itemPrice'); // Target the input for item price
   const itemDescriptionInput = document.querySelector('#itemDescription'); // Target the textarea for item description
 
+  const category = categoryInput.value.trim();
   const name = itemNameInput.value.trim();
   const price = itemPriceInput.value.trim();
   const description = itemDescriptionInput.value.trim();
@@ -16,7 +17,7 @@ const uploadFileHandler = async (event) => {
   const formData = new FormData();
 
   // Append form data with the item details
-  formData.append('category_name', categoryInput.value);
+  formData.append('category_name', category.value);
   formData.append('item_name', name);
   formData.append('price', price);
   formData.append('description', description);
@@ -40,8 +41,7 @@ const uploadFileHandler = async (event) => {
   }
 };
 
-// Target the form in your upload.handlebars
+
 const createItemForm = document.querySelector('#createItemForm');
 
-// Attach the event listener to the form's submit button
 createItemForm.addEventListener('submit', uploadFileHandler);

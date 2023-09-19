@@ -27,17 +27,20 @@ module.exports = {
     }
 
     return `<img src="${imagePath}" alt="${category_name}" width="100" height="100">`;
-    },
-      sellerEmail: (email) => {
-        return email;
-      },
-      format_amount: (amount) => {
-      const parsedAmount = parseFloat(amount);
+  },
+  sellerEmail: (email) => {
+    return email;
+  },
+  format_amount: (amount) => {
+    const parsedAmount = parseFloat(amount);
 
-        if (!isNaN(parsedAmount)) {
-          return parsedAmount.toFixed(2);
-        } else {
-          return "Invalid Amount";
-        }
-      }
-    };
+    if (!isNaN(parsedAmount)) {
+      return parsedAmount.toFixed(2);
+    } else {
+      return "Invalid Amount";
+    }
+  },
+  profile_name: (name) => {
+    return name;
+  }
+};

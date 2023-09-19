@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
       try {
         // Send a PUT request to update the item
-        const response = await fetch(`/api/items/${itemId}`, {
+        const response = await fetch(`/api/item/${itemId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
