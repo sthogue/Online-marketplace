@@ -24,7 +24,7 @@ const loginFormHandler = async (event) => {
 
 const googleFormHandler = async (event) => {
   event.preventDefault();  
-  document.location.replace('/auth/google');
+  document.location.replace('/api/users/auth/google');
 };
 
 document

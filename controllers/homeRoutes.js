@@ -87,16 +87,24 @@ router.get('/item/:id', async (req, res) => {
 // Use withAuth middleware to prevent access to route
 
   router.get('/profile', async (req, res) => {
-    try {
-      // Find the logged in user based on the session ID
-      const userData = await User.findByPk(req.session.user_id, {
+
+   try {
+      let userID;
+      //Find the logged in user based on the session ID
+      if (req.session.user_id === undefined) {
+        userID = req.user.id;
+      } else {
+        userID = req.session.user_id;
+      }
+
+      const userData = await User.findByPk(userID, {
         attributes: { exclude: ['password'] },
         include: [{ model: Item }],
       });
 
       console.log(userData);
   
-      //const user = userData.get({ plain: true });
+      const user = userData.get({ plain: true });
   
       const itemData = await Item.findAll({
         include: [
@@ -110,7 +118,7 @@ router.get('/item/:id', async (req, res) => {
       const items = itemData.map((item) => item.get({ plain: true }));
   
       res.render('profile', {
-        // ...user,
+        ...user,
         items,
         logged_in: true,
       });
@@ -139,7 +147,7 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+//router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
@@ -150,15 +158,24 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
   }
 );
 
-router.get('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
+router.get('/logout', function (req, res, next) {
+
+  if (req.session.user_id === undefined) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/');
     });
+       
   } else {
-    res.status(404).end();
+    if (req.session.logged_in) {
+      req.session.destroy(() => {
+        res.status(204).end();
+      });
+    } else {
+      res.status(404).end();
+    }
+    return res.redirect('/');
   }
-  return redirect('/');
 });
 
 module.exports = router;
