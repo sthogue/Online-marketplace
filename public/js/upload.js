@@ -1,7 +1,6 @@
 const uploadFileHandler = async (event) => {
   event.preventDefault();
 
-  const categoryInput = document.querySelector('#category'); // Target the select for category
   const itemNameInput = document.querySelector('#itemName'); // Target the input for item name
   const itemPriceInput = document.querySelector('#itemPrice'); // Target the input for item price
   const itemDescriptionInput = document.querySelector('#itemDescription'); // Target the textarea for item description
@@ -16,13 +15,9 @@ const uploadFileHandler = async (event) => {
   const formData = new FormData();
 
   // Append form data with the item details
-  formData.append('category_name', categoryInput.value);
   formData.append('item_name', name);
   formData.append('price', price);
   formData.append('description', description);
-  formData.append('date_created', new Date());
-  formData.append('user_id', req.session.user_id);
-  
 
   try {
     const response = await fetch('/api/items', { // Updated API route for creating items
