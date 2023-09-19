@@ -7,6 +7,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const passConfig = require('../../config/passport');
 const crypto = require('crypto');
 
+const userData = [];
 
 router.get('/users', async(req, res) => {
   try {
@@ -128,11 +129,31 @@ router.post('/login', async (req, res) => {
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
 //handles the callback from Google after the user has logged in and exchanges the authorization code for user information
-router.get('/auth/google/callback', 
-  passport.authenticate('google', { 
-      failureRedirect: '/login',
-      successRedirect: '/profile' }),
-);
+// router.get('/auth/google/callback', 
+//   passport.authenticate('google', {  failureRedirect: '/login', successRedirect: '/profile' }, (req, res) => {
+//     // Redirect or respond with a success message
+//     if (req.session.logged_in) {
+//       req.session.save(() => {
+//       req.session.user_id = userData.id;
+//       req.session.logged_in = true;;
+//       } else {
+//         res.redirect('/login');
+//         })),
+// );
+
+router.get('/auth/google/callback', function (req, res, next) {
+  passport.authenticate('google', function (err, user, info, status) {
+    if (err) { 
+      return res.redirect('/login'); }
+    if (!user) { return res.redirect('/login') }
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+      console.log(userData)
+    });
+    res.redirect('/profile');
+  })(req, res, next);
+});
 
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
