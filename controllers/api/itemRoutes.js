@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Item } = require('../../models');
-const {withAuth} = require('../../utils/auth');
+const {GLwithAuth} = require('../../utils/auth');
 
 // this is a GET request to get ALL items listed in the database
 
@@ -37,7 +37,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // this is a POST request to CREATE a new item with a unique ID
-router.post('/', withAuth, async (req, res) => {
+router.post('/', GLwithAuth, async (req, res) => {
   try {
     console.log(req.body);
     const { category, name, price, description, date } = req.body;
