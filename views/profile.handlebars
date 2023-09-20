@@ -1,9 +1,10 @@
 <main>
   <h1>Welcome, {{name}}</h1>
+  <button id='upload-button' class='padding btn btn-primary position-absolute start-50 translate-middle'>Add New Item</button>
+  <div></div>
   <div class='album py-5'>
     <div class='container custom'>
       <div class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 bg-white'>
-        <button id='upload-button' class='padding btn btn-primary'>Add New Item</button>
         {{#each items}}
           <div class='col'>
             <div class='card shadow-sm'>

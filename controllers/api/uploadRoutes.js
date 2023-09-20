@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const { Item } = require('../../models');
-const { withAuth } = require('../../utils/auth');
+const { GLwithAuth } = require('../../utils/auth');
 
-router.post('/', withAuth, async (req, res) => {
+router.post('/', GLwithAuth, async (req, res) => {
   try {
     const { itemName, itemPrice, itemDescription, uploadDate } = req.body;
 
