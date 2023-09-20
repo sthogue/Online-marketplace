@@ -36,7 +36,7 @@ router.get('/upload', (req, res) => {
   res.render('upload');
 });
 
-router.get('/edit-item/:id', (req, res) => {
+router.get('/edit', (req, res) => {
 
   res.render('edit');
 });
@@ -111,7 +111,9 @@ router.get('/item/:id', async (req, res) => {
           {
             model: User,
             attributes: ['name'],
+            
           },
+          
         ],
       });
   
