@@ -71,49 +71,44 @@ router.get('/item/:id', async (req, res) => {
 });
 
 // Use withAuth middleware to prevent access to route
+router.get('/profile', GLwithAuth, async (req, res) => {
+  try {
+    let userID;
 
-  router.get('/profile', GLwithAuth, async (req, res) => {
-
-   try {
-      let userID;
-      //Find the logged in user based on the session ID
-      if (req.session.user_id === undefined) {
-        userID = req.user.id;
-      } else {
-        userID = req.session.user_id;
-      }
-
-      const userData = await User.findByPk(userID, {
-        attributes: { exclude: ['password'] },
-        include: [{ model: Item }],
-      });
-
-      console.log(userData);
-  
-      const user = userData.get({ plain: true });
-  
-      const itemData = await Item.findAll({
-        include: [
-          {
-            model: User,
-            attributes: ['name'],
-            
-          },
-          
-        ],
-      });
-  
-      const items = itemData.map((item) => item.get({ plain: true }));
-  
-      res.render('profile', {
-        ...user,
-        items,
-        logged_in: true,
-      });
-    } catch (err) {
-      res.status(500).json(err);
+    // Find the logged-in user based on the session ID or user ID
+    if (req.session.user_id === undefined) {
+      userID = req.user.id;
+    } else {
+      userID = req.session.user_id;
     }
-  });
+
+    // Retrieve user data, excluding the password
+    const userData = await User.findByPk(userID, {
+      attributes: { exclude: ['password'] },
+    });
+
+    // Convert user data to a plain object
+    const user = userData.get({ plain: true });
+
+    // Retrieve items associated with the user's user_id
+    const itemData = await Item.findAll({
+      where: { user_id: userID }, // Filter items by user_id
+      include: [{ model: User, attributes: ['name'] }],
+    });
+
+    // Convert item data to an array of plain objects
+    const items = itemData.map((item) => item.get({ plain: true }));
+
+    res.render('profile', {
+      ...user,
+      items,
+      logged_in: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
   
 
 router.get('/login', (req, res) => {
