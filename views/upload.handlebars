@@ -11,10 +11,10 @@
           <h1 class='text-center'>Create New Item</h1>
           <div class='row justify-content-center'>
             <div>
-              <form action='/create' method='POST'>
+              <form id="uploadForm" action='/' method='POST'>
                 <div class='form-group'>
                   <label for='itemCategory'>Category:</label>
-                  <select class='form-control' name='category' required>
+                  <select id="category" class='form-control' name='category' required>
                     <option value=''>Select a category</option>
                     <option value='Electronics'>Electronics</option>
                     <option value='Clothing'>Clothing</option>
@@ -25,6 +25,7 @@
                   </select>
                   <label for='itemName'>Item name:</label>
                   <input
+                  id="itemName"
                     type='text'
                     class='form-control'
                     name='item_name'
@@ -34,6 +35,7 @@
                 <div class='form-group'>
                   <label for='itemPrice'>Price:</label>
                   <input
+                  id="itemPrice"
                     type='number'
                     step='0.01'
                     class='form-control'
@@ -69,4 +71,4 @@
     </div>
   </div>
 </div>
-<script src='js/upload.js'></script>
+<script src='/js/upload.js'></script>

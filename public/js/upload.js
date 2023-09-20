@@ -6,6 +6,7 @@ const uploadFileHandler = async (event) => {
   const itemPriceInput = document.querySelector('#itemPrice'); // Target the input for item price
   const itemDescriptionInput = document.querySelector('#itemDescription'); // Target the textarea for item description
 
+  const category = categoryInput.value.trim();
   const name = itemNameInput.value.trim();
   const price = itemPriceInput.value.trim();
   const description = itemDescriptionInput.value.trim();
@@ -13,20 +14,20 @@ const uploadFileHandler = async (event) => {
   // Validate your form fields as needed (e.g., check if they are not empty)
 
   // Create a FormData object to send data to the server
-  const formData = new FormData();
+  const formData = {};
 
   // Append form data with the item details
-  formData.append('category_name', categoryInput.value);
-  formData.append('item_name', name);
-  formData.append('price', price);
-  formData.append('description', description);
-  formData.append('date_created', new Date());
-  formData.append('user_id', req.session.user_id);
+  formData.category= category;
+  formData.name= name;
+  formData.price= price;
+  formData.description= description;
+  formData.date = new Date();
 
   try {
-    const response = await fetch('/api/items', { // Updated API route for creating items
+    const response = await fetch('/api/item/', { // Updated API route for creating items
       method: 'POST',
-      body: formData,
+      body: JSON.stringify(formData),
+      headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
@@ -40,8 +41,7 @@ const uploadFileHandler = async (event) => {
   }
 };
 
-// Target the form in your upload.handlebars
-const createItemForm = document.querySelector('#createItemForm');
 
-// Attach the event listener to the form's submit button
+const createItemForm = document.querySelector('#uploadForm');
+
 createItemForm.addEventListener('submit', uploadFileHandler);

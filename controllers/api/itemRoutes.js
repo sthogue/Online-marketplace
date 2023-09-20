@@ -37,12 +37,19 @@ router.get('/:id', async (req, res) => {
 });
 
 // this is a POST request to CREATE a new item with a unique ID
-// router.post('/', withAuth, async (req, res) => {
-
-  router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
+    console.log(req.body);
+    const { category, name, price, description, date } = req.body;
+
+    console.log(category, name, price, description, date)
+    // Create a new item with the received data
     const newItem = await Item.create({
-      ...req.body,
+      category_name: category,
+      item_name: name,
+      price: price,
+      description: description,
+      date_created: date,
       user_id: req.session.user_id,
     });
 
@@ -53,9 +60,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // this is a DELETE request to delete an item from the database
-// router.delete('/:id', withAuth, async (req, res) => {
-
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
 try {
     const itemData = await Item.destroy({
       where: {

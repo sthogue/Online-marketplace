@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 const passport = require('passport');
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs');
+// const path = require('path');
 
 router.get('/', async(req, res) => {
   try {
@@ -65,6 +65,8 @@ router.post('/login', async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+
 
 //initiates the authentication process and redirects the user to the Google login page
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] },));
