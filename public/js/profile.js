@@ -1,8 +1,9 @@
 const delButtonHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
-    const id = event.target.getAttribute('data-id');
 
-    const response = await fetch(`/api/items/${id}`, {
+    const id = event.target.getAttribute('data-id');
+console.log(id);
+    const response = await fetch(`/api/item/${id}`, {
       method: 'DELETE',
     });
 
@@ -24,6 +25,8 @@ const editButtonHandler = (event) => {
 document.getElementById("upload-button").addEventListener("click", function() {
   window.location.href = "/upload";
 });
+
+
 
 document.querySelectorAll('.btn-group').forEach((btnGroup) => {
   btnGroup.addEventListener('click', (event) => {

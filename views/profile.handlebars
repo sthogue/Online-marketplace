@@ -1,31 +1,39 @@
 <main>
-<h1>Welcome, {{name}}</h1>
-  <div class="album py-5">
-    <div class="container custom">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 bg-white">
-        <button id="upload-button" class="padding btn btn-primary">New Item</button>
+  <h1>Welcome, {{name}}</h1>
+  <div class='album py-5'>
+    <div class='container custom'>
+      <div class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 bg-white'>
+        <button id='upload-button' class='padding btn btn-primary'>Add New Item</button>
         {{#each items}}
-        <div class="col">
-          <div class="card shadow-sm">
-            {{{thumbnail category_name}}}
-            <div class="card-body">
-              <h5 class="card-title">{{item_name}}</h5>
-              <p class="card-text">Price: ${{{format_amount price}}}</p>
-              <p class="card-text">Description:{{description}}</p>
-              <p class="card-text">Uploaded: {{{format_date date_created}}}</p>
+          <div class='col'>
+            <div class='card shadow-sm'>
+              {{{thumbnail category_name}}}
+              <div class='card-body'>
+                <h5 class='card-title'>{{item_name}}</h5>
+                <p class='card-text'>Price: ${{{format_amount price}}}</p>
+                <p class='card-text'>Description:{{description}}</p>
+                <p class='card-text'>Uploaded:
+                  {{{format_date date_created}}}</p>
 
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a href="/edit-item/{{id}}" class="btn btn-sm btn-outline-secondary">Edit</a>
-                  <button type="button" class="btn btn-sm btn-outline-danger" data-id="{{id}}">Delete</button>
+                <div class='d-flex justify-content-between align-items-center'>
+                  <div class='btn-group'>
+                    <a
+                      href='/edit-item/{{id}}'
+                      class='btn btn-sm btn-outline-secondary'
+                    >Edit</a>
+                    <button
+                      type='button'
+                      class='btn btn-sm btn-outline-danger'
+                      data-id='{{id}}'
+                    >Delete</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         {{/each}}
       </div>
     </div>
   </div>
-  <script src="js/profile.js"></script>
+  <script src='/js/profile.js'></script>
 </main>
