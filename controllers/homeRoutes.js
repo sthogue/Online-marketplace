@@ -62,6 +62,8 @@ router.get('/item/:id', async (req, res) => {
     
 
     res.render('item', {
+    // Check if the date property is valid before rendering the template
+        res.render('item', {
       ...item,
       logged_in: req.session.logged_in
     });
