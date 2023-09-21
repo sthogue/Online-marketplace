@@ -20,7 +20,6 @@ router.get('/', async (req, res) => {
 });
 
 // this is a GET request to get one item BY ID in the database
-
 router.get('/:id', async (req, res) => {
   try {
     const newItem = await Item.findOne();
@@ -80,27 +79,8 @@ try {
   }
 });
 
-// this is a GET request takes you to the edit page for a specific item
-router.get('/edit/:id', async (req, res) => {
-  try {
-    const itemId = req.params.id;
-    const item = await Item.findByPk(itemId);
-
-    if (!item) {
-      res.status(404).json({ message: 'Item not found' });
-      return;
-    }
-
-    res.render('edit', {
-      item,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 // PUT request updates the item in the database
-router.put('/edit/:id', async (req, res) => {
+router.put('/edit-item/:id', async (req, res) => {
   try {
     const itemId = req.params.id;
     const item = await Item.findByPk(itemId);

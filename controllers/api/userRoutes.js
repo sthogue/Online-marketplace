@@ -1,13 +1,10 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 const passport = require('passport');
-// const fs = require('fs');
-// const path = require('path');
 
+// Route to get all users
 router.get('/', async(req, res) => {
   try {
-    //const userDataPath = path.join(__dirname, '../../seeds/userData.json');
-    //const userData = JSON.parse(fs.readFileSync(userDataPath, 'utf8'));
     
     const userData = await User.findAll({
       attributes: { exclude: ['password'] }
@@ -19,6 +16,7 @@ router.get('/', async(req, res) => {
   }
 });
 
+// Route to create a new user
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -34,6 +32,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Route to login a user
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
