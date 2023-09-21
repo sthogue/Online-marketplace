@@ -1,10 +1,10 @@
 module.exports = {
+  // formats the date to MM/DD/YYYY
   format_date: (date) => {
-    // Format date as MM/DD/YYYY
+
     return date.toLocaleDateString();
   },
-  // function to generate an image if category_name equals a specific category
-  // it specifies an image path based on category name
+  // Brings in an image based on the category name
   thumbnail: (category_name) => {
     let imagePath;
 
@@ -28,9 +28,11 @@ module.exports = {
 
     return `<img src="${imagePath}" alt="${category_name}" width="100" height="100">`;
   },
+  // Brings in the seller's email
   sellerEmail: (email) => {
     return email;
   },
+  // Formats the price to 2 decimal places
   format_amount: (amount) => {
     const parsedAmount = parseFloat(amount);
 

@@ -1,14 +1,11 @@
 const router = require('express').Router();
 const { Item, User } = require('../models');
 const { GLwithAuth } = require('../utils/auth');
-
-
 const passport = require('passport');
 
-
+// GET all items for homepage
 router.get('/', async (req, res) => {
   try {
-    // Get all Items and JOIN with user data
     const itemData = await Item.findAll({
       include: [
         {
@@ -18,10 +15,8 @@ router.get('/', async (req, res) => {
       ],
     });
 
-    // Serialize data so the template can read it
     const items = itemData.map((item) => item.get({ plain: true }));
 
-    // Pass serialized data and session flag into template
     res.render('homepage', { 
       items, 
       logged_in: req.session.logged_in || req.isAuthenticated()
@@ -31,21 +26,40 @@ router.get('/', async (req, res) => {
   }
 });
 
+// route to upload page
 router.get('/upload', (req, res) => {
 
   res.render('upload');
 });
 
-router.get('/edit', (req, res) => {
+// route to edit page for a specific item
+router.get('/edit/:id', async (req, res) => {
+  try {
+    const itemId = req.params.id;
+    console.log(itemId, "this is the item id");
+    const item = await Item.findByPk(itemId);
+    console.log(item, "this is the item");
 
-  res.render('edit');
+    if (!item) {
+      res.status(404).json({ message: 'Item not found' });
+      return;
+    }
+
+    res.render('edit', {
+      ... item,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
+// route to about page
 router.get('/about', (req, res) => {
 
   res.render('about');
 });
 
+// route to item page
 router.get('/item/:id', async (req, res) => {
   try {
     const itemData = await Item.findByPk(req.params.id, {
@@ -60,7 +74,6 @@ router.get('/item/:id', async (req, res) => {
     const item = itemData.get({ plain: true });
 
     res.render('item', {
-    // Check if the date property is valid before rendering the template
       ...item,
       logged_in: req.session.logged_in
     });
@@ -69,7 +82,7 @@ router.get('/item/:id', async (req, res) => {
   }
 });
 
-// Use withAuth middleware to prevent access to route
+// route to profile page
 router.get('/profile', GLwithAuth, async (req, res) => {
   try {
     let userID;

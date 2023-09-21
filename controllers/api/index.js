@@ -5,7 +5,7 @@ const itemRoutes = require('./itemRoutes');
 
 
 router.use('/users', userRoutes);
-router.use('/upload', uploadRoutes);
+// router.use('/upload', uploadRoutes);
 router.use('/item', itemRoutes);
 
 module.exports = router;

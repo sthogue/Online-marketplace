@@ -1,31 +1,28 @@
-// Add an event listener to the form when the DOM is ready
+// JS for edit.handlebars
 document.addEventListener('DOMContentLoaded', () => {
-    // Select the edit form
+    // Selects the edit form
     const editItemForm = document.querySelector('#editItemForm');
     console.log(editItemForm)
-  
-    // Attach an event listener to the form's submit button
+    // Event listener for when the edit form is submitted
     editItemForm.addEventListener('submit', async (event) => {
       event.preventDefault();
-  
-      // Get the item ID from the form's action URL
+      
+      const itemId = document.location.href.split('/').pop();
+      console.log(itemId)
 
-      const itemId = document.location.href.split('/').pop();console.log(itemId)
-
-        
-      // Get the form fields
+      // Selects input fields
       const categoryInput = document.querySelector('#item_category');
       const itemNameInput = document.querySelector('#item_name');
       const itemPriceInput = document.querySelector('#item_price');
       const itemDescriptionInput = document.querySelector('#description');
-  
-      // Get the values from the form fields
+      
+      // Gets the values from the input fields
       const category = categoryInput.value.trim();
       const itemName = itemNameInput.value.trim();
       const itemPrice = itemPriceInput.value.trim();
       const itemDescription = itemDescriptionInput.value.trim();
   
-      // Create a data object with the updated item information
+      // Updates the item object
       const updatedItem = {
         category_name: category,
         item_name: itemName,
@@ -33,26 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
         description: itemDescription,
       };
       
+      // Sends a PUT request to update the selected item
       try {
-        // Send a PUT request to update the item
-        const response = await fetch(`/api/item/edit/${itemId}`, {
+        const response = await fetch(`/api/item/edit-item/${itemId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(updatedItem),
         });
-  
+        // If the edit is successful redirects to the profile page, otherwise alerts the user it failed
         if (response.ok) {
-          // Redirect to the profile page or wherever appropriate
           document.location.replace('/profile');
         } else {
-          // Handle errors here
           alert('Failed to edit item');
         }
       } catch (error) {
         console.error(error);
-        // Handle errors here
         alert('An error occurred while editing the item');
       }
     });
